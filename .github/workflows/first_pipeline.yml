@@ -1,0 +1,30 @@
+
+name: First Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      MY_VARIABLE: ${{ vars.MY_VARIABLE }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Access secret
+      run: echo "Your secret is ${{ secrets.MY_SECRET }}"
+
+    - name: Run something
+      run: |
+        echo "Hello from GitHub Actions!"
+        echo "Env var is $MY_VARIABLE"
