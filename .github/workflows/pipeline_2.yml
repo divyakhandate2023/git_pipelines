@@ -1,0 +1,21 @@
+name: Pipeline #2
+
+on:
+  workflow_dispatch:  # Enables "Run workflow" button on GitHub
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    env:
+      SECOND_VAR: ${{ vars.SECOND_VAR }}
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Print secret
+      run: echo "Your masked secret is ${{ secrets.SECOND_SECRET }}"
+
+    - name: Print variable
+      run: echo "Env variable is $SECOND_VAR"
